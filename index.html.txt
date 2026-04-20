@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IncluiTEA</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+body { font-family: Arial; background:#f5f7fa; text-align:center;}
+button { padding:12px; margin:5px; width:90%; border:none; border-radius:10px;}
+.aluno { background:#6FCF97;}
+.docente { background:#56CCF2;}
+.card { background:white; padding:10px; margin:10px; border-radius:10px;}
+</style>
+</head>
+
+<body>
+
+<h2>IncluiTEA</h2>
+
+<button class="aluno" onclick="aluno()">Sou Estudante</button>
+<button class="docente" onclick="docente()">Sou Docente</button>
+
+<div id="conteudo"></div>
+
+<script>
+function aluno(){
+  document.getElementById("conteudo").innerHTML = `
+    <div class="card">🎓 Aula</div>
+    <div class="card">📚 Estudo</div>
+  `;
+}
+
+function docente(){
+  document.getElementById("conteudo").innerHTML = `
+    <div class="card">Guia TEA</div>
+    <div class="card">Checklist</div>
+  `;
+}
+</script>
+
+</body>
+</html>
