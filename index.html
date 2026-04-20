@@ -3,42 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IncluiTEA</title>
-
-<link rel="manifest" href="manifest.json">
+<title>IncluiTEA EPT</title>
 
 <style>
-body { font-family: Arial; background:#f5f7fa; text-align:center;}
-button { padding:12px; margin:5px; width:90%; border:none; border-radius:10px;}
+body { font-family: Arial; background:#f5f7fa; text-align:center; margin:0;}
+h2 { color:#2F80ED; }
+
+.button {
+  width:90%;
+  padding:12px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+}
+
 .aluno { background:#6FCF97;}
 .docente { background:#56CCF2;}
-.card { background:white; padding:10px; margin:10px; border-radius:10px;}
+.voltar { background:#ccc;}
+
+.card {
+  background:white;
+  padding:12px;
+  margin:10px;
+  border-radius:10px;
+  text-align:left;
+}
+
+input {
+  width:90%;
+  padding:10px;
+  margin:5px;
+}
 </style>
 </head>
 
 <body>
 
-<h2>IncluiTEA</h2>
+<h2>IncluiTEA EPT</h2>
+<p>Escolha seu perfil</p>
 
-<button class="aluno" onclick="aluno()">Sou Estudante</button>
-<button class="docente" onclick="docente()">Sou Docente</button>
+<button class="button aluno" onclick="areaAluno()">Sou Estudante</button>
+<button class="button docente" onclick="areaDocente()">Sou Docente</button>
 
 <div id="conteudo"></div>
 
 <script>
-function aluno(){
-  document.getElementById("conteudo").innerHTML = `
-    <div class="card">🎓 Aula</div>
-    <div class="card">📚 Estudo</div>
-  `;
+
+function areaAluno(){
+document.getElementById("conteudo").innerHTML = `
+
+<div class="card">
+<h3>📅 Rotina do Dia</h3>
+<input placeholder="Digite sua atividade">
+<button onclick="salvar()">Salvar</button>
+<p id="lista"></p>
+</div>
+
+<div class="card">
+<h3>📚 Materiais</h3>
+<a href="https://www.youtube.com" target="_blank">Assistir vídeo</a>
+</div>
+
+<button class="button voltar" onclick="voltar()">Voltar</button>
+`;
 }
 
-function docente(){
-  document.getElementById("conteudo").innerHTML = `
-    <div class="card">Guia TEA</div>
-    <div class="card">Checklist</div>
-  `;
+function salvar(){
+let valor = document.querySelector("input").value;
+document.getElementById("lista").innerHTML += "✔ " + valor + "<br>";
 }
+
+function areaDocente(){
+document.getElementById("conteudo").innerHTML = `
+
+<div class="card">
+<h3>🧠 Guia TEA</h3>
+<p>Estudantes com TEA podem se beneficiar de rotinas estruturadas e apoio visual.</p>
+</div>
+
+<div class="card">
+<h3>📋 Checklist</h3>
+<label><input type="checkbox"> Linguagem clara</label><br>
+<label><input type="checkbox"> Rotina estruturada</label><br>
+<label><input type="checkbox"> Apoio visual</label>
+</div>
+
+<button class="button voltar" onclick="voltar()">Voltar</button>
+`;
+}
+
+function voltar(){
+document.getElementById("conteudo").innerHTML = "";
+}
+
 </script>
 
 </body>
