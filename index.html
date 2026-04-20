@@ -6,15 +6,21 @@
 <title>IncluiTEA EPT</title>
 
 <style>
-body { font-family: Arial; background:#f5f7fa; text-align:center; margin:0;}
+body {
+  margin:0;
+  font-family: Arial;
+  background:#f5f7fa;
+  text-align:center;
+}
+
 h2 { color:#2F80ED; }
 
 .button {
   width:90%;
   padding:12px;
-  margin:5px;
+  margin:6px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   font-size:16px;
 }
 
@@ -26,7 +32,7 @@ h2 { color:#2F80ED; }
   background:white;
   padding:12px;
   margin:10px;
-  border-radius:10px;
+  border-radius:12px;
   text-align:left;
 }
 
@@ -41,7 +47,7 @@ input {
 <body>
 
 <h2>IncluiTEA EPT</h2>
-<p>Escolha seu perfil</p>
+<p>Inclusão digital para estudantes e docentes</p>
 
 <button class="button aluno" onclick="areaAluno()">Sou Estudante</button>
 <button class="button docente" onclick="areaDocente()">Sou Docente</button>
@@ -50,51 +56,90 @@ input {
 
 <script>
 
+// ===== ALUNO =====
 function areaAluno(){
 document.getElementById("conteudo").innerHTML = `
 
 <div class="card">
 <h3>📅 Rotina do Dia</h3>
-<input placeholder="Digite sua atividade">
+<input id="tarefa" placeholder="Digite sua atividade">
 <button onclick="salvar()">Salvar</button>
 <p id="lista"></p>
 </div>
 
 <div class="card">
+<h3>😊 Como estou me sentindo?</h3>
+<button onclick="emocao('Calmo')">🙂 Calmo</button>
+<button onclick="emocao('Ansioso')">😟 Ansioso</button>
+<button onclick="emocao('Cansado')">😴 Cansado</button>
+<p id="emocao"></p>
+</div>
+
+<div class="card">
 <h3>📚 Materiais</h3>
-<a href="https://www.youtube.com" target="_blank">Assistir vídeo</a>
+<a href="https://www.youtube.com" target="_blank">Assistir vídeo educativo</a>
 </div>
 
 <button class="button voltar" onclick="voltar()">Voltar</button>
 `;
 }
 
+// salvar rotina
 function salvar(){
-let valor = document.querySelector("input").value;
+let valor = document.getElementById("tarefa").value;
+if(valor !== ""){
 document.getElementById("lista").innerHTML += "✔ " + valor + "<br>";
+localStorage.setItem("rotina", document.getElementById("lista").innerHTML);
+}
 }
 
+// emoção
+function emocao(e){
+document.getElementById("emocao").innerHTML = "Você está: " + e;
+}
+
+// ===== DOCENTE =====
 function areaDocente(){
 document.getElementById("conteudo").innerHTML = `
 
 <div class="card">
 <h3>🧠 Guia TEA</h3>
-<p>Estudantes com TEA podem se beneficiar de rotinas estruturadas e apoio visual.</p>
+<p>Estudantes com TEA podem se beneficiar de rotinas estruturadas, previsibilidade e apoio visual.</p>
 </div>
 
 <div class="card">
-<h3>📋 Checklist</h3>
+<h3>📋 Checklist Inclusivo</h3>
 <label><input type="checkbox"> Linguagem clara</label><br>
 <label><input type="checkbox"> Rotina estruturada</label><br>
-<label><input type="checkbox"> Apoio visual</label>
+<label><input type="checkbox"> Apoio visual</label><br>
+<label><input type="checkbox"> Flexibilidade avaliativa</label>
+</div>
+
+<div class="card">
+<h3>💡 Estratégias</h3>
+<p>- Dividir tarefas em etapas</p>
+<p>- Usar imagens e cores suaves</p>
+<p>- Reduzir estímulos excessivos</p>
 </div>
 
 <button class="button voltar" onclick="voltar()">Voltar</button>
 `;
 }
 
+// voltar
 function voltar(){
 document.getElementById("conteudo").innerHTML = "";
+}
+
+// carregar dados salvos
+window.onload = function(){
+if(localStorage.getItem("rotina")){
+document.getElementById("conteudo").innerHTML = `
+<div class="card">
+<h3>📅 Rotina Salva</h3>
+<p>${localStorage.getItem("rotina")}</p>
+</div>`;
+}
 }
 
 </script>
